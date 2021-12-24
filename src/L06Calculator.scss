@@ -1,0 +1,43 @@
+$btn_color: bisque;
+$btn_hover_color :rgb(214, 178, 134);
+@mixin btn_size {
+    width: 80px;
+    height: 80px;
+    font-size: 20px;
+}
+@mixin border($width:1px,$style:solid,$color:rgb(49, 41, 41)) {
+    border-width: $width;
+    border-style: $style;
+    border-color: $color;
+}
+@mixin absoulte_pos($x:0,$y:0) {
+    position: absolute;
+    left: $x;
+    right: $y;
+}
+@mixin  vender_attri($name,$value) {
+    @each $var in ('webkit','moz','ms','o') {
+        -#{$var}-#{$name} : $value;
+    }
+    #{$name} : $value;
+}
+@mixin  vender_value($name,$value) {
+    @each $var in ('-webkit-','-moz-','-ms-','-o-','') {
+        #{$name} : #{$var}$value
+    }
+}
+.btn_grid_container{
+    width: 100vw;
+    @include vender_value(display, grid );
+
+    grid-template-columns: auto auto auto auto ;
+    justify-content: center;
+    button{
+        background-color: $btn_color;
+        @include border( 3px,dotted,red);   
+        @include btn_size;
+        &:hover{
+            background-color: $btn_hover_color;
+        }
+    }
+}
